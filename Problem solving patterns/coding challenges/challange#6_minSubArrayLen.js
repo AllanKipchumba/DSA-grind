@@ -24,19 +24,23 @@ function minSubArrayLen(array, sum) {
   let total = 0;
   let i = 0;
   let j = 0;
-  let minLen = Infinity;
+  let minLength = Infinity;
 
   while (i < array.length) {
     if (total < sum && j < array.length) {
+      //expand the window
       total += array[j];
       j++;
     } else if (total >= sum) {
-      minLen = Math.min(minLen, j - i);
+      //get the minimum array length
+      minLength = Math.min(minLength, j - i);
+      //shrink the window
       total -= array[i];
       i++;
     } else {
       break;
     }
   }
-  return minLen === Infinity ? 0 : minLen;
+  //return the value of mini
+  return minLength === Infinity ? 0 : minLength;
 }
