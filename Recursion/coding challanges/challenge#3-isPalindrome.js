@@ -5,12 +5,12 @@ to it is a palindrome (reads the same forward and backward). Otherwise it return
 */
 
 function isPalindrome(string) {
-  function helper(helperInput) {
-    if (helperInput.length <= 1) return helperInput;
-    return helper(helperInput.slice(1)) + helperInput[0];
+  function reverseString(inputString) {
+    if (inputString.length <= 1) return inputString;
+    return reverseString(inputString.slice(1)) + inputString[0];
   }
 
-  let stringReverse = helper(string);
+  let stringReverse = reverseString(string);
 
   return stringReverse === string ? true : false;
 }
