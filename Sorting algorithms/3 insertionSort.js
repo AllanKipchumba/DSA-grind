@@ -17,15 +17,11 @@ function insertionSort(arr) {
     let currentElement = arr[i];
     let j = i - 1;
 
-    //comparison with the sorted portion of the array and shifting
     while (j >= 0 && arr[j] > currentElement) {
-      //shift the larger value to the right
       arr[j + 1] = arr[j];
       j--;
     }
 
-    //insertion => insert current element into its correct sorted position in the array
-    //the position just to the right of the last shifted element
     arr[j + 1] = currentElement;
   }
   return arr;
