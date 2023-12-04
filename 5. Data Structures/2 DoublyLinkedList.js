@@ -92,7 +92,113 @@ class DoublyLinkedList {
     return this;
   }
 
-  //
+  //access a node by its position
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+
+    let count, current;
+
+    if (index <= this.length / 2) {
+      count = 0;
+      current = this.head;
+
+      while (count !== index) {
+        current = current.next;
+        count++;
+      }
+    } else {
+      count = this.length - 1;
+      current = this.tail;
+
+      while (count !== index) {
+        current = current.prev;
+        count--;
+      }
+    }
+    return current;
+  }
+
+  //replace the value of a node
+  set(index, val) {
+    let targetNode = this.get(index);
+    if (targetNode !== null) {
+      targetNode.val = val;
+      return true;
+    }
+    return false;
+  }
+
+  //add a node at a certain position
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) return !!this.unshift(val);
+    if (index === this.length) return !!this.push(val);
+
+    let newNode = new Node(val);
+    let beforeNode = this.get(index - 1);
+    let afterNode = beforeNode.next;
+
+    beforeNode.next = newNode;
+    newNode.prev = beforeNode;
+    newNode.next = afterNode;
+    afterNode.prev = newNode;
+
+    this.length++;
+    return true;
+  }
+
+  //remove a node in a list by a certain position
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    let targetNode = this.get(index);
+    let nodeBefore = targetNode.prev;
+    let nodeAfter = targetNode.next;
+
+    nodeBefore.next = nodeAfter;
+    nodeAfter.prev = nodeBefore;
+
+    targetNode.prev = null;
+    targetNode.next = null;
+
+    this.length--;
+    return targetNode;
+  }
+
+  //reverse a DoublyLinkedList
+  reverse() {
+    let node = this.head;
+
+    // Swap head and tail
+    this.head = this.tail;
+    this.tail = node;
+
+    let prev = null;
+    let next;
+
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      node.prev = next; // Corrected: Update the prev pointer as well
+      prev = node;
+      node = next;
+    }
+    return this;
+  }
+
+  //print all values in the DoublyLinkedList
+  print() {
+    let arr = [];
+    let current = this.head;
+
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+    return arr;
+  }
 }
 
 let list = new DoublyLinkedList();
