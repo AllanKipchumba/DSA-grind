@@ -2,7 +2,7 @@
  * A tree is a none-linear data structure that consists of nodes in a parent-child relationship.
  * Trees - A parent node can have as many child nodes as it can
  * Binary trees - Each node can have a maximum of 2 children
- * Binary search tree
+ * Binary search tree - Special kind of a binary tree that is sorted in a particular order
  *      - Every parent has at most 2 children
  *      - Every node to the left of a parent node is always less than the parent
  *      - Every node to the right of a parent node is always greater than the parent
