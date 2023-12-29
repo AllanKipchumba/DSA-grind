@@ -6,6 +6,12 @@
  *      - Every parent has at most 2 children
  *      - Every node to the left of a parent node is always less than the parent
  *      - Every node to the right of a parent node is always greater than the parent
+ *
+ *      ---------------
+ *       BIG O OF BST
+ *      ----------------
+ * Insertion - o(log n)
+ * Searching - o(log n)
  */
 
 //BST implementation

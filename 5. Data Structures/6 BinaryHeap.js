@@ -19,6 +19,13 @@
  *   ------------------      ----------------------------      -----------------------
  * - For any child node at index n, the parent node is at index (n-1)/2
  *                                      -------------------------------
+ *
+ *          -----------------------
+ *           BIG O OF BINARY HEAPS
+ *          -----------------------
+ *  Insertion - O(log N)
+ *  Removal   - O(log N)
+ *  Search    - O(N)
  */
 
 class MaxBinaryHeap {
