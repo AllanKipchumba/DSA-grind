@@ -1,3 +1,29 @@
+/**      ---------------------------------
+ *            DIJKSTRA'S ALGORITHM
+ *       ---------------------------------
+ *  - Dijkstra's algorithm is a graph traversal algorithm used to find the shortest
+ *    path between 2 nodes in a graph with non-negative edge weights.
+ *
+ *  - The algorithm begins at the starting node and explores the graph outward, visiting
+ *    nodes in order of increasing distance from the starting node. It maintains a priority
+ *    queue to efficiently select the node with the smallest known distance at each step.
+ *
+ *  - The priority queue DS is used to manage vertices and prioritize exploration based on
+ *    current known distances.
+ *
+ *         Time complexity
+ *     ---------------------------
+ *  - Depends on the data structure used for the priority queue
+ *  - With a binary heap-based priority queue, Dijkstra's algorithm has a time complexity
+ *    of O((V + E) * log(V)), where V is the number of vertices and E is the number of edges.
+ *
+ *        Applications
+ *    ----------------------------
+ *  (1) Routing algorithms in computer networks
+ *  (2) GPS navigation systems
+ *  (3) Resource allocation in computer networks
+ */
+
 class Node {
   constructor(val, priority) {
     this.val = val;
@@ -26,6 +52,7 @@ class PriorityQueue {
       idx = parentIdx;
     }
   }
+
   dequeue() {
     const min = this.values[0];
     const end = this.values.pop();
@@ -72,19 +99,23 @@ class WeightedGraph {
   constructor() {
     this.adjacencyList = {};
   }
+
   addVertex(vertex) {
     if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
   }
+
   addEdge(vertex1, vertex2, weight) {
     this.adjacencyList[vertex1].push({ node: vertex2, weight });
     this.adjacencyList[vertex2].push({ node: vertex1, weight });
   }
+
   Dijkstra(start, finish) {
     const nodes = new PriorityQueue();
     const distances = {};
     const previous = {};
     let path = []; //to return at end
     let smallest;
+
     //build up initial state
     for (let vertex in this.adjacencyList) {
       if (vertex === start) {
@@ -96,6 +127,7 @@ class WeightedGraph {
       }
       previous[vertex] = null;
     }
+
     // as long as there is something to visit
     while (nodes.values.length) {
       smallest = nodes.dequeue().val;
@@ -108,6 +140,7 @@ class WeightedGraph {
         }
         break;
       }
+
       if (smallest || distances[smallest] !== Infinity) {
         for (let neighbor in this.adjacencyList[smallest]) {
           //find neighboring node
@@ -115,6 +148,7 @@ class WeightedGraph {
           //calculate new distance to neighboring node
           let candidate = distances[smallest] + nextNode.weight;
           let nextNeighbor = nextNode.node;
+
           if (candidate < distances[nextNeighbor]) {
             //updating new smallest distance to neighbor
             distances[nextNeighbor] = candidate;
@@ -148,3 +182,15 @@ graph.addEdge('D', 'F', 1);
 graph.addEdge('E', 'F', 1);
 
 graph.Dijkstra('A', 'E');
+
+/** The reference graph:
+ *           A
+ *        2 /  \ 4
+ *         C    B
+ *      2 /  3   \ 3
+ *       D  ----  E
+ *        \      /
+ *       1 \    / 1
+ *          \  /
+ *            F
+ */
